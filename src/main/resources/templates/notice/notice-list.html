@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>공지사항 목록</title>
+  <style>
+    main { width: 1200px; height: 960px; margin: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+<main>
+  <h2>공지사항 목록</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>번호</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="notice, stat : ${notices}">
+      <td th:text="${stat.count}"></td>
+      <td>
+        <a th:href="@{/notice/detail/{id}(id=${notice.noticeId})}" th:text="${notice.title}"></a>
+      </td>
+      <td th:text="${notice.userId}"></td>
+      <td th:text="${#temporals.format(notice.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

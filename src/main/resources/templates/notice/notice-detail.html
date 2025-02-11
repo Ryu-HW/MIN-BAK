@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>공지사항 상세</title>
+  <style>
+    body {
+        width: 1200px;
+        height: 960px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+    }
+    main {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        background: #f9f9f9;
+    }
+    h1 {
+        text-align: center;
+    }
+    .info {
+        margin-bottom: 20px;
+    }
+    .info label {
+        font-weight: bold;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .button-container a {
+        text-decoration: none;
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border-radius: 5px;
+    }
+    .button-container a:hover {
+        background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>공지사항 상세</h1>
+  <div class="info">
+    <label>제목:</label> <span th:text="${notice.title}"></span>
+  </div>
+  <div class="info">
+    <label>작성자 ID:</label> <span th:text="${notice.userId}"></span>
+  </div>
+  <div class="info">
+    <label>작성 날짜:</label> <span th:text="${#temporals.format(notice.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
+  </div>
+  <div class="info">
+    <label>내용:</label>
+    <p th:text="${notice.content}"></p>
+  </div>
+  <div class="button-container">
+    <a href="/notice/list">목록으로</a>
+  </div>
+</main>
+</body>
+</html>

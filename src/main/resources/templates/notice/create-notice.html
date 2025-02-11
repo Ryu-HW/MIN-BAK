@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 등록</title>
+    <style>
+        main.container {
+            width: 1200px;
+            height: 960px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+        input, textarea {
+            width: 70%;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    <h1>공지사항 등록</h1>
+    <form th:action="@{/notice/create-notice}" method="post" th:object="${noticeDto}">
+        <div>
+            <label for="userId">작성자 ID:</label>
+            <input type="number" id="userId" th:field="*{userId}" required />
+            <div class="error" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        </div>
+        <div>
+            <label for="title">제목:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+            <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+        <div>
+            <label for="content">내용:</label>
+            <textarea id="content" th:field="*{content}" rows="10" required></textarea>
+            <div class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+        </div>
+        <div>
+            <button type="submit">등록</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
