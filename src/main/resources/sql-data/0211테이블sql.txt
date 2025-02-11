@@ -30,6 +30,34 @@ CREATE TABLE board_comments (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 댓글 수정일
     FOREIGN KEY (post_id) REFERENCES board_posts(id) ON DELETE CASCADE  -- 게시글 삭제 시 해당 댓글도 삭제됨
 );
+create database minbak_db;
+
+use minbak_db;
+
+CREATE TABLE board_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 고유 ID, 자동 증가
+    name VARCHAR(255) NOT NULL      -- 카테고리 이름 (필수)
+);
+CREATE TABLE board_posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,              -- 고유 게시글 ID, 자동 증가
+    title VARCHAR(255) NOT NULL,                     -- 게시글 제목
+    content TEXT NOT NULL,                           -- 게시글 내용
+    author VARCHAR(255) NOT NULL,                    -- 작성자 (임의 입력)
+    subject VARCHAR(255),                            -- 말머리 (선택 사항)
+    category_id INT,                                 -- 카테고리 ID (외래 키)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 생성일 (기본값: 현재 시간)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- 수정일 (자동 업데이트)
+    FOREIGN KEY (category_id) REFERENCES board_categories(id) -- 외래 키 설정 (카테고리 테이블의 id 참조)
+);
+CREATE TABLE board_comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,             -- 고유 댓글 ID, 자동 증가
+    post_id INT NOT NULL,                           -- 해당 댓글이 속한 게시글 ID (외래 키)
+    author VARCHAR(255) NOT NULL,                   -- 댓글 작성자
+    content TEXT NOT NULL,                          -- 댓글 내용
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 댓글 작성일 (기본값: 현재 시간)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 댓글 수정일
+    FOREIGN KEY (post_id) REFERENCES board_posts(id) ON DELETE CASCADE  -- 게시글 삭제 시 해당 댓글도 삭제됨
+);
 
 -- 1. 회원 테이블
 
@@ -68,6 +96,12 @@ CREATE TABLE `rooms` (
     `price` INT NOT NULL COMMENT '숙박 가격',
     `use_guide` VARCHAR(2000) COMMENT '숙박 이용 안내'
 );
+
+ALTER TABLE `rooms`
+ADD COLUMN `user_id` INT NOT NULL COMMENT '사용자 ID',
+ADD CONSTRAINT `fk_rooms_user`
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
+    ON DELETE CASCADE;
 
 -- 3. 예약 테이블
 CREATE TABLE `books` (
@@ -115,3 +149,4 @@ CREATE TABLE `notice` (
     `created_at` DATETIME NOT NULL COMMENT '공지사항 생성 시간',
     FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
 );
+
