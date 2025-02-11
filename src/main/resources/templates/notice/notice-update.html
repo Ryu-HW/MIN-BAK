@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 수정</title>
+</head>
+<body>
+<form th:object="${noticeDto}" action="/notice/update" method="post">
+    <input type="hidden" th:field="*{noticeId}" />
+
+    <label>제목:</label>
+    <input type="text" th:field="*{title}" required />
+
+    <label>내용:</label>
+    <textarea th:field="*{content}" required></textarea>
+
+    <button type="submit">수정하기</button>
+</form>
+</body>
+</html>

@@ -8,11 +8,31 @@
     table { width: 100%; border-collapse: collapse; }
     th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
     th { background-color: #f4f4f4; }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .create-btn {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .create-btn:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
 <main>
-  <h2>공지사항 목록</h2>
+  <div class="top-bar">
+    <h2>공지사항 목록</h2>
+    <a href="/notice/notice-create" class="create-btn">글쓰기</a>
+  </div>
+
   <table>
     <thead>
     <tr>

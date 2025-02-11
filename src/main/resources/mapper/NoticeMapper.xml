@@ -18,4 +18,14 @@
     <select id="getNoticeById" parameterType="int" resultType="com.minbak.web.notice.NoticeDto">
         SELECT * FROM notice WHERE notice_id = #{noticeId}
     </select>
+
+    <update id="updateNotice" parameterType="com.minbak.web.notice.NoticeDto">
+        UPDATE notice
+        SET title = #{title}, content = #{content}
+        WHERE notice_id = #{noticeId}
+    </update>
+
+    <delete id="deleteNotice" parameterType="int">
+        DELETE FROM notice WHERE notice_id = #{noticeId}
+    </delete>
 </mapper>

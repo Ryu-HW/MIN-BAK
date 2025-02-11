@@ -31,7 +31,7 @@
 <body>
 <main class="container">
     <h1>공지사항 등록</h1>
-    <form th:action="@{/notice/create-notice}" method="post" th:object="${noticeDto}">
+    <form th:action="@{/notice/notice-create}" method="post" th:object="${noticeDto}">
         <div>
             <label for="userId">작성자 ID:</label>
             <input type="number" id="userId" th:field="*{userId}" required />

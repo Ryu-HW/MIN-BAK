@@ -23,4 +23,11 @@ public class NoticeService {
         return noticeMapper.getNoticeById(noticeId);
     }
 
+    public void updateNotice(NoticeDto noticeDto) {
+        noticeMapper.updateNotice(noticeDto);
+    }
+
+    public void deleteNotice(int noticeId) {
+        noticeMapper.deleteNotice(noticeId);
+    }
 }

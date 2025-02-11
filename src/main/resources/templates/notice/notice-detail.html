@@ -30,15 +30,23 @@
         text-align: center;
         margin-top: 20px;
     }
-    .button-container a {
+    .button-container a, .button-container form button {
         text-decoration: none;
         padding: 10px 20px;
         background: #007bff;
         color: white;
         border-radius: 5px;
+        border: none;
+        cursor: pointer;
     }
-    .button-container a:hover {
+    .button-container a:hover, .button-container form button:hover {
         background: #0056b3;
+    }
+    .delete-btn {
+        background: #dc3545 !important;
+    }
+    .delete-btn:hover {
+        background: #a71d2a !important;
     }
   </style>
 </head>
@@ -58,7 +66,17 @@
     <label>내용:</label>
     <p th:text="${notice.content}"></p>
   </div>
+
   <div class="button-container">
+    <!-- 수정하기 버튼 -->
+    <a th:href="@{/notice/update-form/{id}(id=${notice.noticeId})}">수정하기</a>
+
+    <!-- 삭제 버튼 -->
+    <form th:action="@{/notice/delete/{id}(id=${notice.noticeId})}" method="post" style="display:inline;">
+      <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제하기</button>
+    </form>
+
+    <!-- 목록으로 돌아가기 -->
     <a href="/notice/list">목록으로</a>
   </div>
 </main>
