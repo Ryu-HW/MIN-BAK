@@ -24,6 +24,28 @@
     .create-btn:hover {
       background: #0056b3;
     }
+    /* 페이징 스타일 */
+    .pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .pagination a {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 0 5px;
+      text-decoration: none;
+      border: 1px solid #007bff;
+      color: #007bff;
+      border-radius: 5px;
+    }
+    .pagination a.active {
+      background: #007bff;
+      color: white;
+    }
+    .pagination a:hover {
+      background: #0056b3;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -53,6 +75,23 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- 페이징 UI -->
+  <div class="pagination">
+    <!-- 이전 페이지 -->
+    <a th:if="${currentPage > 1}" th:href="@{/notice/list(page=${currentPage - 1})}">이전</a>
+
+    <!-- 페이지 번호 -->
+    <a th:each="page : ${#numbers.sequence(1, totalPages)}"
+       th:href="@{/notice/list(page=${page})}"
+       th:text="${page}"
+       th:classappend="${page == currentPage} ? 'active' : ''">
+    </a>
+
+    <!-- 다음 페이지 -->
+    <a th:if="${currentPage < totalPages}" th:href="@{/notice/list(page=${currentPage + 1})}">다음</a>
+  </div>
+
 </main>
 </body>
 </html>

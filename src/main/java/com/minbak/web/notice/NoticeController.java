@@ -30,11 +30,22 @@ public class NoticeController {
         noticeService.createNotice(noticeDto);
         return "redirect:/notice/list";
     }
-
+//페이징 기능 추가된 공지사항 목록 조회
     @GetMapping("/list")
-    public String getNoticeList(Model model){
-        List<NoticeDto> notices = noticeService.getNoticeList();
+    public String getNoticeList(@RequestParam(defaultValue = "1") int page,Model model){
+        int pageSize = 5; // 한페이지 당 갯수 설정
+        int offset = (page - 1) * pageSize;
+
+        //페이징 적용된 데이터 가져오는
+        List<NoticeDto> notices = noticeService.getNoticeList(page,pageSize);
+        //전체 페이지 개수 계산 해주는
+        int totalPages = noticeService.getTotalPages(pageSize);
+
+
         model.addAttribute("notices", notices);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
         return "notice/notice-list";
     }
     @GetMapping("/detail/{id}")

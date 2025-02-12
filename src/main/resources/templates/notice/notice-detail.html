@@ -69,7 +69,7 @@
 
   <div class="button-container">
     <!-- 수정하기 버튼 -->
-    <a th:href="@{/notice/update-form/{id}(id=${notice.noticeId})}">수정하기</a>
+    <a th:href="@{/notice/update/{id}(id=${notice.noticeId})}">수정하기</a>
 
     <!-- 삭제 버튼 -->
     <form th:action="@{/notice/delete/{id}(id=${notice.noticeId})}" method="post" style="display:inline;">

@@ -11,10 +11,17 @@
 
     <!-- 공지사항 목록 조회 -->
     <select id="getNoticeList" resultType="com.minbak.web.notice.NoticeDto">
-        SELECT notice_id, user_id, title, created_at FROM notice ORDER BY created_at DESC
+        SELECT notice_id, user_id, title, created_at
+        FROM notice
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
     </select>
-    <!-- 공지사항 상세 조회 -->
+    <!-- 공지사항 총 개수 조회 -->
+    <select id="getNoticeCount" resultType="int">
+        SELECT COUNT(*) FROM notice
+    </select>
 
+    <!-- 공지사항 상세 조회 -->
     <select id="getNoticeById" parameterType="int" resultType="com.minbak.web.notice.NoticeDto">
         SELECT * FROM notice WHERE notice_id = #{noticeId}
     </select>
