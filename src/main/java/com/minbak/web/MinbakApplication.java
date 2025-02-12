@@ -10,4 +10,5 @@ public class MinbakApplication {
 		SpringApplication.run(MinbakApplication.class, args);
 	}
 
+
 }

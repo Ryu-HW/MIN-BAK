@@ -5,7 +5,7 @@
 <mapper namespace="com.minbak.web.users.UsersMapper">
 
     <!-- 회원가입 -->
-    <insert id="createUser" parameterType="com.minbak.web.users.UserDto" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createUser" parameterType="com.minbak.web.users.UserDto" useGeneratedKeys="true" keyProperty="userId">
         INSERT INTO users (name, email, phone_number, password)
         VALUES (#{name}, #{email}, #{phoneNumber}, #{password})
     </insert>
@@ -38,6 +38,10 @@
     <select id="findUserByEmail" resultType="com.minbak.web.users.UserDto">
         SELECT *
         FROM users WHERE email = #{email}
+    </select>
+
+    <select id="findAllUserIds" resultType="int">
+        SELECT user_id FROM users
     </select>
 
 </mapper>

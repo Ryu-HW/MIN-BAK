@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersService {
 
@@ -31,8 +33,18 @@ public class UsersService {
                 usersMapper.createUserRoleByUserIdAndRoleId(user_id,1);
             }
         }else {
-            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+//            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+            return;
         }
 
+    }
+
+    public void createHostBy3rdUsers() {
+        List<Integer> userIds = usersMapper.findAllUserIds();
+        for(int userId : userIds){
+            if ((userId % 3) == 1){
+                usersMapper.createUserRoleByUserIdAndRoleId(userId,2);
+            }
+        }
     }
 }

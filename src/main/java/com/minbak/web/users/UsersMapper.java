@@ -24,4 +24,6 @@ public interface UsersMapper {
 
     // 사용자 ID로 역할 조회
     public List<RoleDto> findRolesByUserId(Integer userId);
+
+    public List<Integer> findAllUserIds();
 }
